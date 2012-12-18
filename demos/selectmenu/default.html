@@ -15,11 +15,32 @@
 	$(function() {
 		$('#speed').selectmenu();
 
-		$('#files').selectmenu();
+		// this is a dropdown style selectmenu
+		var button, menu;
+		var files = $('#files').selectmenu({
+			position: {
+				my: "left top",
+				at: "left bottom"
+			},
+			icons: {
+				button: "ui-icon-triangle-1-s"
+			},
+			// adjust button border corner radius
+			open: function(){				
+				button.addClass( "ui-corner-top" ).removeClass( "ui-corner-all" );
+			},
+			close: function(){				
+				button.removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+			}
+		});		
+		button = files.selectmenu("widget");
+		menu = files.selectmenu("menuWidget");
+		// adjust menu width to button width
+		menu.parent().css("width", button.outerWidth());		
+		// change menu border corner radius
+		menu.addClass( "ui-corner-bottom" ).removeClass( "ui-corner-all" );
 
-		var withOverflow = $('#number').selectmenu({
-			dropdown: false
-		});
+		var withOverflow = $('#number').selectmenu();
 		withOverflow.selectmenu("menuWidget").addClass("overflow");
 	});
 	</script>
